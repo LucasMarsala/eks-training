@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: result-service
+  namespace: result
+spec:
+  selector:
+    app: result-container
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5001
+      targetPort: 80
+  type: ClusterIP

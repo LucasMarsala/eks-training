@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-deployment
+  namespace: worker
+  labels:
+    app: worker-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: worker-container
+  template:
+    metadata:
+      labels:
+        app: worker-container
+    spec:
+      containers:
+      - name: worker-container
+        image: worker:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS_HOST
+          value: redis-service.redis.svc.cluster.local
+        - name: POSTGRES_HOST
+          value: db-service.db.svc.cluster.local
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: password
+        - name: POSTGRES_DB
+          value: postgres

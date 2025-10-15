@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: poll-service
+  namespace: poll
+spec:
+  selector:
+    app: poll-container
+  ports:
+    - name: http
+      protocol: TCP
+      port: 5000
+      targetPort: 80
+  type: ClusterIP

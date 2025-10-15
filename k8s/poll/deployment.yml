@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poll-deployment
+  namespace: poll
+  labels:
+    app: poll-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: poll-container
+  template:
+    metadata:
+      labels:
+        app: poll-container
+    spec:
+      containers:
+      - name: poll-container
+        image: poll:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        env:
+        - name: REDIS_HOST
+          value: redis-service.redis.svc.cluster.local
