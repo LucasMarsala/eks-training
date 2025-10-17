@@ -1,4 +1,4 @@
-# EKS Training - Voting Application
+# k8s Training - Voting Application
 
 A microservices-based voting application deployed on Kubernetes, demonstrating modern container orchestration and GitOps practices.
 
